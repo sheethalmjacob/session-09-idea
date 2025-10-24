@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Maria — Fire Hula Hoop Artiste</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#">Maria — Fire Hoop</a>
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+        <nav class="site-nav">
+          <a href="#about">About</a>
+          <a href="#showreel">Showreel</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="social">
+          <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+            <!-- instagram glyph -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="#ffcc66" stroke-width="1.4"/>
+              <circle cx="12" cy="12" r="3.2" stroke="#ffcc66" stroke-width="1.4"/>
+              <circle cx="17" cy="7" r="0.8" fill="#ffcc66"/>
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <rect x="2" y="6" width="20" height="12" rx="2" stroke="#ff6b1a" stroke-width="1.4"/>
+              <path d="M10 9.5 L16 12 L10 14.5 Z" fill="#ff6b1a" />
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <path d="M9 8v6a3 3 0 1 0 3-3V6h3v2.5a5 5 0 1 1-6 4.5V8z" fill="#ff7a3d" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero" class="hero">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h1>Maria</h1>
+            <p class="tagline">Fire hula hoop artiste — bold, rhythmic & mesmerizing</p>
+            <p class="cta-row"><a class="btn" href="#showreel">Watch Showreel</a><a class="btn ghost" href="#contact">Book Maria</a></p>
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <!-- Animated hoop SVG -->
+            <svg id="fire-hoop" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="rimGrad" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#ffef80" stop-opacity="0.9" />
+                  <stop offset="60%" stop-color="#ff8a00" stop-opacity="0.9" />
+                  <stop offset="100%" stop-color="#ff2e00" stop-opacity="0.9" />
+                </radialGradient>
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="6" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- hoop ring -->
+              <g transform="translate(150 150)">
+                <circle class="hoop-ring" r="90" fill="none" stroke="url(#rimGrad)" stroke-width="10" filter="url(#glow)" />
+
+                <!-- flame layers (animated with CSS keyframes) -->
+                <g class="flames">
+                  <path class="flame flame-1" d="M-90 0 C -70 -40 -20 -60 0 -70 C 20 -60 70 -40 90 0 C 70 20 20 40 0 60 C -20 40 -70 20 -90 0 Z" />
+                  <path class="flame flame-2" d="M-75 -10 C -60 -40 -10 -55 0 -60 C 10 -55 60 -40 75 -10 C 50 10 10 30 0 40 C -10 30 -50 10 -75 -10 Z" />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section about">
+        <div class="container">
+          <h2>About</h2>
+          <div class="about-grid">
+            <div class="about-text">
+              <p>Maria blends athletic skill with theatrical fire performance. With a flowing style and high-energy choreography, she performs at festivals, private events, and staged shows. Her work focuses on storytelling through movement and light.</p>
+              <ul>
+                <li>Specialties: Fire hoop, LED hoop, choreography</li>
+                <li>Available for festivals, corporate events, and workshops</li>
+                <li>Safety-certified and insured</li>
+              </ul>
+            </div>
+            <div class="about-image" aria-hidden="true">
+              <!-- simple decorative hoop image using same SVG for style continuity -->
+              <svg viewBox="0 0 200 200" class="mini-hoop">
+                <circle cx="100" cy="100" r="70" stroke="url(#rimGradMini)" stroke-width="8" fill="none" />
+                <defs>
+                  <radialGradient id="rimGradMini" cx="50%" cy="50%">
+                    <stop offset="0%" stop-color="#fff2b8" />
+                    <stop offset="100%" stop-color="#ff6b1a" />
+                  </radialGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="showreel" class="section showreel">
+        <div class="container">
+          <h2>Showreel</h2>
+          <div class="video-wrap">
+            <!-- Responsive embedded placeholder video (replace src with actual showreel) -->
+            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" title="Showreel" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact">
+        <div class="container">
+          <h2>Contact</h2>
+          <div class="contact-grid">
+            <form id="contact-form" class="contact-form" action="mailto:you@example.com" method="POST" enctype="text/plain">
+              <label for="name">Name</label>
+              <input id="name" name="name" required />
+
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required />
+
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+
+              <div class="form-row">
+                <button class="btn" type="submit">Send</button>
+                <button class="btn ghost" type="reset">Reset</button>
+              </div>
+            </form>
+            <div class="contact-info">
+              <p>For bookings and enquiries, email <a href="mailto:maria@example.com">maria@example.com</a> or use the form.</p>
+              <p>Follow on social media for updates and tour dates.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-row">
+          <p>© Maria — Fire Hula Hoop Artiste</p>
+          <div class="social footer-social">
+            <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
+            <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">TikTok</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
