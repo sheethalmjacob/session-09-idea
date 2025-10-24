@@ -46,22 +46,78 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
     });
   }
-
-  // Animated fire cursor (follow mouse). Degrades on touch devices.
+  // Animated particle fire cursor (canvas) — degrades on touch devices
   if(!('ontouchstart' in window)){
-    const cursor = document.createElement('div');
-    cursor.className = 'fire-cursor';
-    cursor.innerHTML = '<div class="flame-core"></div><div class="flame-flicker"></div>';
-    document.body.appendChild(cursor);
+    const canvas = document.createElement('canvas');
+    canvas.className = 'fire-canvas';
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d', {alpha: true});
+    let DPR = window.devicePixelRatio || 1;
+    function resizeCanvas(){
+      DPR = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * DPR;
+      canvas.height = window.innerHeight * DPR;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas, {passive:true});
 
-    let lastX = 0, lastY = 0;
+    let particles = [];
+    const MAX_PARTICLES = 600;
+
+    function spawnParticles(x, y, count=6){
+      for(let i=0;i<count;i++){
+        particles.push({
+          x: x + (Math.random()-0.5)*6,
+          y: y + (Math.random()-0.5)*6,
+          vx: (Math.random()-0.5) * 1.6,
+          vy: - (Math.random()*2 + 1.2),
+          life: 0,
+          ttl: 30 + Math.random()*30,
+          size: 6 + Math.random()*6
+        });
+      }
+      if(particles.length > MAX_PARTICLES) particles.splice(0, particles.length - MAX_PARTICLES);
+    }
+
+    let lastMove = {x: -9999, y: -9999};
     window.addEventListener('mousemove', (e)=>{
-      lastX = e.clientX; lastY = e.clientY;
-      cursor.style.transform = `translate(${lastX}px, ${lastY}px) translate(-50%,-50%)`;
+      lastMove.x = e.clientX; lastMove.y = e.clientY;
+      // spawn relative to movement speed
+      spawnParticles(e.clientX, e.clientY, 4 + Math.round(Math.min(6, Math.abs(e.movementX || 0) + Math.abs(e.movementY || 0))));
     }, {passive:true});
 
-    // hide on pointerdown for text selection, show again on pointerup
-    window.addEventListener('pointerdown', ()=>{ cursor.style.opacity = '0' });
-    window.addEventListener('pointerup', ()=>{ cursor.style.opacity = '1' });
+    function update(){
+      ctx.clearRect(0,0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = 'lighter';
+      for(let i = particles.length - 1; i >= 0; i--){
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        // mimick rising smoke/flame easing
+        p.vy += 0.06; // gravity (pull down) reduces upward speed over time
+        p.life++;
+        const t = p.life / p.ttl;
+        const alpha = Math.max(0, 1 - t);
+        const size = p.size * (1 - t*0.6);
+
+        // gradient glow
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size*2);
+        g.addColorStop(0, `rgba(255, 245, 180, ${alpha})`);
+        g.addColorStop(0.4, `rgba(255, 150, 40, ${alpha*0.95})`);
+        g.addColorStop(1, `rgba(255, 40, 0, 0)`);
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size, 0, Math.PI*2);
+        ctx.fill();
+
+        // remove if dead
+        if(p.life >= p.ttl) particles.splice(i, 1);
+      }
+      requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
   }
 });

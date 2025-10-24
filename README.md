@@ -26,6 +26,18 @@ Extras added
 - Header and footer social links (Instagram / YouTube / TikTok) were added to `index.html`.
 - An animated "fire cursor" was implemented using a small DOM element that follows the mouse (`script.js`) and styles in `styles.css`. It degrades automatically on touch devices.
 
+Illustration update
+
+- Replaced the fire hoop visual with an illustrative octopus inside `index.html` (`#octo-illustration`). The octopus has 8 tentacles. One tentacle holds a hula hoop, one tentacle juggles three balls (animated), and one tentacle holds a wand. Tentacles, balls, hoop and wand have lightweight CSS animations.
+
+Showreel and color update
+
+- The showreel `iframe` was updated to the Instagram reel URL you provided. Note: Instagram sometimes blocks direct iframe embedding; a fallback link is included under the video.
+- The site's palette was updated to an orange theme (octopus, hoop and accents). Tentacle motion and juggling timing were tuned for a livelier effect.
+
+- The showreel was replaced with the YouTube Shorts link you later requested; the embed uses the standard YouTube embed URL and includes a fallback link to the Shorts page.
+- The cursor is now a canvas-based particle fire system. It follows the mouse on desktop and gracefully degrades (no cursor canvas) on touch devices. The effect uses a lightweight particle emitter for good performance.
+
 Notes
 
 - The contact form uses a `mailto:` fallback. For production use, wire it to a backend or third-party form provider if you need server-side submission.
